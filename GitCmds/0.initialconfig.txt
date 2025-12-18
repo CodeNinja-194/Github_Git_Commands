@@ -1,0 +1,16 @@
+//Setting username,user email,core   editor
+
+
+1.git config --global user.name "Ram"   // setting the username.
+
+
+2.git config --global user.email "sriramadusumilli98@gmail.com"  //setting the user email
+
+
+3.git config --list  //show the details about above info.
+
+
+4.git config --global core.editor emacs    //setting the core editor to emacs.
+
+
+5.git config --global core.editor vim //set core editor to vim.   //setting the core editor to vim.

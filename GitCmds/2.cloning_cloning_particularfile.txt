@@ -1,0 +1,13 @@
+// Cloning git repository.
+
+//copy url from an github repository.
+
+
+1.git clone https://github.com/RamAdusumilli194/Github_Git_Commands.git
+
+
+//If we want to give our own name to a repository 
+
+2.git clone https://github.com/RamAdusumilli194/Github_Git_Commands/Status_tracking.txt
+
+

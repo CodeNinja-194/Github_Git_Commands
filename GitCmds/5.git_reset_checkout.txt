@@ -1,0 +1,12 @@
+// git reset,unstage & checkout
+
+
+1:git reset p.txt   //unstage file from staging directory
+
+
+2:git checkout p.txt //to previous commit 
+
+
+3:git checkout . // to previous commit all the files.
+
+4:git reset head~1 //rollback to last commit.
