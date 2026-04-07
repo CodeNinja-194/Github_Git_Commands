@@ -1,5 +1,5 @@
-
-
+# This .gitignore file is used to specify which files and folders should be ignored by Git when committing changes to the repository.
 # hiding the files and text files.
+
 # hiding the folders
 /gitCmds/00.IMPROVEMENTS_SUMMARY.txt
