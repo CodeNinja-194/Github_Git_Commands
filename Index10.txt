@@ -1,0 +1,8 @@
+Hello from Sample index file. This file is used to demonstrate how to read and write files in Python. You can use the built-in `open()` function to read from and write to files. Here is an example of how to read from a file:        
+
+```pythonwith open('index.txt', 'r') as file:
+    content = file.read()        
+    print(content)    
+```
+
+This will print the contents of the file to the console. You can also use the `write()` method to write to a file.
