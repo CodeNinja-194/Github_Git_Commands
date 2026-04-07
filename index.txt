@@ -1,1 +1,1 @@
-Hi this is a sample file that is going to be added in the github file
+Hello from Sample index file 
