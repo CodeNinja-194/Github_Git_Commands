@@ -1,1 +1,5 @@
-testauth
+
+
+# hiding the files and text files.
+# hiding the folders
+/gitCmds/00.IMPROVEMENTS_SUMMARY.txt

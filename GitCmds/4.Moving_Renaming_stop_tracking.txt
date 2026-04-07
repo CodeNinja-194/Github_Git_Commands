@@ -1,8 +1,78 @@
-// Moving,Renaming & stop tracking file.
+//  Moving, Renaming, and Stopping File Tracking
 
-1: git rm filename     //removes a file.
+//  REMOVING FILES
 
-2: git mv filename newfilename //rename a filename.
+1:  git rm file_name
+    //  Removes a file from both tracking system and working directory
+    //  The deletion is staged and ready to commit
 
-3:git rm --cached filename //for stop  tracking a particulat file 
-								//we have to remove it from tracking system of git,as it is tracking earlier
+2:  git rm -f file_name
+    //  Force removes a file (if it has local changes and tracking)
+
+3:  git rm --cached file_name
+    //  Stops tracking a file but keeps it in working directory
+    //  Useful for removing files that shouldn't be tracked
+
+4:  rm file_name
+    //  Removes file from working directory only (not Git tracked file)
+    //  Git still sees it as deleted/modified
+
+5:  git add file_name
+    //  After 'rm', you need to stage the deletion with 'git add'
+
+//  RENAMING FILES
+
+6:  git mv old_filename new_filename
+    //  Renames or moves a file within repository
+    //  Maintains file history correctly
+
+7:  git mv file_name path/to/new_location/
+    //  Moves file to different directory
+
+8:  git mv folder/ new_folder_name/
+    //  Renames an entire directory/folder
+
+9:  mv old_filename new_filename
+    //  Renames file using system command (not recommended)
+    //  Would appear as deleted + new file in Git
+
+10: git add old_filename new_filename
+    //  Stages both deletion and addition if done with system mv
+
+//  CHECKING WHAT WILL CHANGE
+
+11: git status
+    //  Shows files marked for deletion or renaming
+
+12: git diff
+    //  Shows content differences (if file still exists and modified)
+
+//  UNDOING FILE OPERATIONS
+
+13: git restore file_name
+    //  Restores a deleted file back to previous commit
+
+14: git checkout -- file_name
+    //  Alternative way to restore a deleted or modified file
+
+15: git reset HEAD file_name
+    //  Unstages a file if accidentally staged for deletion
+
+//  PRACTICAL WORKFLOW EXAMPLE
+
+//  Renaming a file correctly:
+//  1. git mv old_file new_file
+//  2. git status  (verify the change)
+//  3. git commit -m "Rename old_file to new_file"
+
+//  Removing a file correctly:
+//  1. git rm file_name
+//  2. git status  (verify file is staged for deletion)
+//  3. git commit -m "Remove file_name"
+
+//  NOTES:
+//  - Always use 'git mv' and 'git rm' for proper tracking
+//  - Using system commands (mv, rm) confuses Git
+//  - 'git rm' stages the deletion automatically
+//  - Use 'git rm --cached' to remove from tracking without deleting locally
+//  - File history is preserved correctly when using 'git mv'

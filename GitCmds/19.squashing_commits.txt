@@ -1,0 +1,52 @@
+//  Squashing Commits - Combining Multiple Commits into One
+
+//  Squashing creates clean history by combining related commits
+//  Useful before merging to main branch
+
+//  METHOD 1: Using Interactive Rebase (RECOMMENDED)
+
+1:  git rebase -i HEAD~3                                //prepare to squash last 3 commits
+
+2:  In the editor that opens:
+    pick   abc1234 First commit message
+    squash def5678 Second commit message
+    squash ghi9012 Third commit message
+
+3:  After editing (change 'pick' to 'squash' for commits to combine), save and close editor
+
+4:  Edit the combined commit message in next editor
+
+5:  save and close
+
+//  METHOD 2: Using git reset
+
+6:  git log --oneline                                   //see last commits
+
+7:  git reset --soft HEAD~3                             //undo last 3 commits but keep changes staged
+
+8:  git commit -m "Combined message for 3 commits"      //make single commit
+
+//  METHOD 3: Before Pull Request
+
+9:  git rebase -i origin/main                           //squash commits relative to main branch
+
+10: Edit interactive rebase, marking commits as 'squash'
+
+11: git push -f origin branch_name                      //force push (only if not shared yet)
+
+//  VERIFY AFTER SQUASHING
+
+12: git log --oneline                                   //verify commits are combined
+
+13: git diff origin/main                                //verify changes are correct
+
+//  EXAMPLE INTERACTIVE REBASE:
+//  # Commands:
+//  # p, pick   = use commit
+//  # r, reword = use commit, but edit message
+//  # s, squash = use commit, but meld into previous
+//  # f, fixup  = like squash, discard log message
+
+//  Best Practice:
+//  Squash before merging to main/master
+//  Keep feature branch history as is (if shared)

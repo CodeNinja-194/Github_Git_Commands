@@ -1,19 +1,87 @@
-//status,Initializing,Tracking and Deleting 
+//  Status, Initializing, Tracking, and Deleting Files in Git
 
-1.git status   //first check if there are any files for any untracked files.
+//  CHECKING STATUS
 
-2.git init     //Initialized empty Git repository in particular location 
+1:  git status
+    //  Shows the current state of the repository (untracked, modified, staged files)
 
-3.git add file_name //for commiting files or staging individual file.
+2:  git status --short
+    //  Shows short format status (more compact, easier to read)
 
-4.git add --a  //for files into staging area
+3:  git status -s
+    //  Same as --short (compact status output)
 
-5.git add .  //all files into staging area
+//  INITIALIZING A REPOSITORY
 
-6.git commit -m "Initial commit" // message,commit all staged files to versioned history 
+4:  git init
+    //  Initializes a new empty Git repository in the current directory
 
-7.git commit  // open an editor 
+5:  git init project_name
+    //  Creates a new directory and initializes a Git repository in it
 
-8.git log //show commits,full change history
+//  STAGING FILES (Adding to staging area)
 
-9.rm -rf .git //delete .git folder//stop tracking no longer a git repository.
+6:  git add file_name
+    //  Stages a specific file for committing
+
+7:  git add -A
+    //  Stages all modified and new files in the entire repository
+
+8:  git add .
+    //  Stages all modified and new files in the current directory and subdirectories
+
+9:  git add *.txt
+    //  Stages all .txt files in the current directory
+
+10: git add src/
+    //  Stages all files in the 'src' directory
+
+//  COMMITTING FILES (Creating a snapshot of changes)
+
+11: git commit -m "message"
+    //  Commits all staged files with a short message
+
+12: git commit -m "message" -m "description"
+    //  Commits with title and detailed description
+
+13: git commit
+    //  Opens the default editor to write a commit message (allows multi-line)
+
+14: git commit --amend
+    //  Modifies the last commit (add more files or change message)
+
+15: git commit --amend --no-edit
+    //  Adds changes to last commit without changing the message
+
+//  VIEWING HISTORY
+
+16: git log
+    //  Shows full commit history with hash, author, date, and message
+
+17: git log --oneline
+    //  Shows commit history in one line per commit (short format)
+
+18: git log -3
+    //  Shows only the last 3 commits
+
+19: git log --all
+    //  Shows commits from all branches, not just current branch
+
+//  STOPPING TRACKING
+
+20: rm -rf .git
+    //  Deletes the .git folder - stops tracking, removes all Git history
+    //  WARNING: This removes ALL version history permanently!
+
+21: git rm file_name
+    //  Removes a file from tracking and deletes it from working directory
+
+22: git rm --cached file_name
+    //  Stops tracking a file but keeps it in working directory
+
+//  NOTES:
+//  - Always check 'git status' before committing to see what will be committed
+//  - Stage changes with 'git add' before committing
+//  - Write clear, descriptive commit messages
+//  - Each commit should represent one logical change
+//  - Use 'git log' to review commit history

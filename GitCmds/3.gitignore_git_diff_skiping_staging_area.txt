@@ -1,21 +1,96 @@
-//.gitignore , git diff and skipping staging area
+//  .gitignore, git diff, and Skipping Staging Area
 
-//file name which we add in .gitignore  , that file  changes will not affect git status beacuse we had ignored that file.
+//  GITIGNORE - Ignoring Files from Tracking
 
-1: touch .gitignore                                                 //for ignoring particular file changes
+//  Files and patterns added to .gitignore will NOT be tracked by Git
+//  Changes to ignored files will NOT appear in 'git status'
 
-2: *.log                                                            //will ignore all .log files, if written in .gitignore
+1:  touch .gitignore
+    //  Creates a .gitignore file in the repository root
 
-3. foldername/                                                      //to ignore folder and its files in .gitignore
+2:  *.log
+    //  Pattern in .gitignore - ignores all .log files wherever they are
 
-4. git diff                                                         //compare staging area with working directory
+3:  node_modules/
+    //  Pattern in .gitignore - ignores entire node_modules directory
 
-5. git diff  file_name                                              //compare staging area with working directory
+4:  .env
+    //  Pattern in .gitignore - ignores .env file (sensitive data)
 
-5. git diff --staged                                                //compare staging area with previous commit
+5:  *.pyc
+    //  Pattern in .gitignore - ignores all Python compiled files
 
-7. git diff --staged a.txt                                          //checking changes of staged file or //compare staging area with previous commit
+6:  .DS_Store
+    //  Pattern in .gitignore - ignores macOS system files
 
-6. git commit -a -m "message"                                       //for skiping staging area (Direct commit)
+7:  temp/
+    //  Pattern in .gitignore - ignores entire temp directory
 
-//only staged files will go into commit , but the untrackerd files will not go into commit, we have to specifically stage that file first.
+8:  config/secrets.json
+    //  Pattern in .gitignore - ignores specific file by path
+
+9:  !important.log
+    //  Exception in .gitignore - the ! means "don't ignore this file"
+
+10: git check-ignore -v file_name
+    //  Shows which .gitignore rule is excluding a file
+
+11: git rm --cached file_name
+    //  Stops tracking a file that was previously tracked (add to .gitignore first)
+
+//  GIT DIFF - Comparing Changes
+
+//  Working Directory: Your actual files on disk
+//  Staging Area: Files staged with 'git add' (ready to commit)
+//  Previous Commit: Last committed version
+
+12: git diff
+    //  Shows differences between working directory and staging area
+    //  Shows what will CHANGE if you run 'git add'
+
+13: git diff file_name
+    //  Shows differences for a specific file only
+    //  Compares working directory vs staging area
+
+14: git diff --staged
+    //  Shows differences between staging area and last commit
+    //  Shows what will commit if you run 'git commit'
+
+15: git diff --staged file_name
+    //  Shows staged changes for a specific file only
+
+16: git diff HEAD
+    //  Shows all changes since last commit (working dir + staging area)
+
+17: git diff branch1 branch2
+    //  Shows differences between two branches
+
+18: git diff HEAD~1 HEAD
+    //  Shows changes made in the most recent commit
+
+19: git diff --stat
+    //  Shows summary of changes (file names and number of insertions/deletions)
+
+20: git diff --color-words
+    //  Highlights changed words instead of entire lines
+
+//  SKIPPING STAGING AREA - Committing Directly
+
+21: git commit -a
+    //  Commits all modified tracked files without 'git add'
+    //  Does NOT include new untracked files
+
+22: git commit -a -m "message"
+    //  Commits all modified files with message (skips staging area)
+
+23: git commit -am "message"
+    //  Same as above (shorter syntax)
+
+//  IMPORTANT NOTES:
+//  - 'git add' stages changes
+//  - 'git diff' shows unstaged changes
+//  - 'git diff --staged' shows staged changes ready to commit
+//  - 'git commit -a' skips staging, but only for MODIFIED files
+//  - New files still need 'git add' even with 'git commit -a'
+//  - Only tracked files can use 'git commit -a'
+//  - .gitignore must be committed to repository for others to use it

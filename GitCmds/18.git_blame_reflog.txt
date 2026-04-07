@@ -1,0 +1,51 @@
+//  Git Blame and Reflog - Tracking Changes and Recovery
+
+//  BLAME: Find who changed what and when
+//  REFLOG: Recover from mistakes by accessing commit history
+
+//  GIT BLAME
+
+1:  git blame file_name                                 //show who changed each line
+
+2:  git blame -L 10,20 file_name                        //blame specific lines (10-20)
+
+3:  git blame -L 10,+5 file_name                        //blame starting at line 10 for next 5 lines
+
+4:  git blame --date=short file_name                    //show date in short format (YYYY-MM-DD)
+
+5:  git blame -e file_name                              //show email instead of author name
+
+6:  git blame -C file_name                              //show original author if code was moved
+
+7:  git blame commit_hash -- file_name                  //blame specific commit
+
+8:  git log -p file_name                                //show all changes to file (alternative to blame)
+
+9:  git log -p -S "text" file_name                      //find commits that added/removed specific text
+
+//  GIT REFLOG (Reference Log)
+
+10: git reflog                                          //show history of HEAD movements
+
+11: git reflog show branch_name                         //show reflog for specific branch
+
+12: git show @{n}                                       //show commit at reflog position n  (e.g., @{2})
+
+13: git reset --hard @{n}                               //restore to specific reflog position
+
+14: git checkout @{n}                                   //checkout to specific commit in reflog
+
+15: git reflog expire --expire=30.days --all            //remove reflog entries older than 30 days
+
+//  RECOVERY EXAMPLES
+
+16: Accidentally reset HEAD?
+    git reflog                                          //find lost commit
+    git checkout commit_hash                            //or git reset --hard commit_hash
+
+17: Lost a commit?
+    git reflog                                          //search for it
+    git cherry-pick commit_hash                         //reapply it
+
+//  Note: Reflog only keeps local history, not pushed commits
+//  For pushed commits, always use git log or check remote

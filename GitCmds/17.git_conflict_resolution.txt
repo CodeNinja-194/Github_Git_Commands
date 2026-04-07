@@ -1,0 +1,59 @@
+//  Git Conflict Resolution - Detailed Guide
+
+//  Conflicts occur when merging/rebasing/cherry-picking branches with overlapping changes
+
+//  IDENTIFYING CONFLICTS
+
+1:  git status                                          //shows files with conflicts (both modified tag)
+
+2:  git diff                                            //show all conflicting sections
+
+3:  git diff --name-only --diff-filter=U                //show only conflicting files
+
+4:  git diff :1:file :3:file                            //show base vs theirs version
+
+//  CONFLICT MARKERS (in file):
+//  <<<<<<< HEAD (or current branch)
+//  your changes
+//  =======
+//  incoming changes
+//  >>>>>>> branch_name
+
+//  RESOLVING CONFLICTS MANUALLY
+
+5:  Edit the conflicted file(s) and remove conflict markers, keeping desired changes
+
+6:  git add resolved_file                               //stage the resolved file
+
+7:  git commit                                          //complete the merge/rebase/cherry-pick
+
+//  RESOLVING USING TOOLS
+
+8:  git merge --abort                                   //cancel merge and go back
+
+9:  git rebase --abort                                  //cancel rebase and go back
+
+10: git merge -X ours branch_name                       //merge preferring current branch changes
+
+11: git merge -X theirs branch_name                     //merge preferring incoming branch changes
+
+12: git checkout --theirs file_name                     //use version from incoming branch
+
+13: git checkout --ours file_name                       //use version from current branch
+
+//  ADVANCED RESOLUTION
+
+14: git mergetool                                       //open configured merge tool (meld, vimdiff, etc.)
+
+15: git config merge.tool vimdiff                       //set default merge tool
+
+16: git config merge.conflictstyle diff3                //show base, ours, theirs (3-way diff)
+
+//  AFTER RESOLUTION
+
+17: git log --oneline --graph --all                     //visualize merge history after resolution
+
+//  Best Practice: Keep conflicts small by:
+//  - Communicating with team
+//  - Pulling frequently
+//  - Keeping branches focused and short-lived

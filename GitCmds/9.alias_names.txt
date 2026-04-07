@@ -1,34 +1,161 @@
-// alias in git commands
+//  Git Aliases - Creating Shortcut Commands
 
-//  alias are for short naming of commands according to our choice for our easiness.
+//  Git aliases allow you to create shorter, custom command names
+//  Very useful for frequently used commands
 
-//  some examples :
+//  BASIC ALIAS CREATION
 
-1:  if we want to make git status as git v (perform same task as git status)
+1:  git config --global alias.st status
+    //  Creates 'git st' as shortcut for 'git status'
+    //  Usage: git st
 
-    git config --global alias.v status
+2:  git config --global alias.co checkout
+    //  Creates 'git co' as shortcut for 'git checkout'
+    //  Usage: git co branch-name
 
-    git v || git status                                         //any 1 can be used
+3:  git config --global alias.br branch
+    //  Creates 'git br' as shortcut for 'git branch'
+    //  Usage: git br
 
+4:  git config --global alias.cm commit
+    //  Creates 'git cm' as shortcut for 'git commit'
+    //  Usage: git cm -m "message"
 
-2:  if we want to make short command for commit
+5:  git config --global alias.ad add
+    //  Creates 'git ad' as shortcut for 'git add'
+    //  Usage: git ad file_name
 
-    git config --global alias.ct status
+//  COMMON USEFUL ALIASES
 
-    git commit || git ct                                        //any 1 can be used
+6:  git config --global alias.unstage 'restore --staged --'
+    //  Creates 'git unstage file' to unstage files
+    //  Usage: git unstage file_name
 
+7:  git config --global alias.last 'log -1 HEAD'
+    //  Creates 'git last' to show last commit
+    //  Usage: git last
 
-3:  alias for (git restore --staged)                            //command for untracking // unstage
+8:  git config --global alias.visual 'log --graph --oneline --all'
+    //  Creates 'git visual' to show branch graph
+    //  Usage: git visual
 
-    git config --global alias.unstage 'restore --staged --'
+9:  git config --global alias.amend 'commit --amend --no-edit'
+    //  Creates 'git amend' to add to last commit without changing message
+    //  Usage: git amend
 
-    git restore --staged file_name  ||  git restore unstage     //any 1 can be used
+10: git config --global alias.undo 'reset HEAD~1 --soft'
+    //  Creates 'git undo' to undo last commit keeping changes
+    //  Usage: git undo
 
-4:  alias for git log -p -1                                     //show last commit with previoud diff
+//  ALIASES WITH COMPLEX COMMANDS
 
-    git config --global alias.last 'log -p -1'
+11: git config --global alias.ll 'log --pretty=format:"%h -- %an -- %ar"'
+    //  Creates 'git ll' for pretty log output
+    //  Shows: short hash, author, relative time
+    //  Usage: git ll
 
-    git log -p -1   ||  git last
+12: git config --global alias.lol 'log --oneline --graph --all'
+    //  Creates 'git lol' (log of life!)
+    //  Shows branch history visually
+    //  Usage: git lol
 
+13: git config --global alias.stat 'log --stat'
+    //  Creates 'git stat' to show changes summary
+    //  Usage: git stat
 
-    and many more alias can be formed...........
+14: git config --global alias.diff-staged 'diff --staged'
+    //  Creates 'git diff-staged' shortcut
+    //  Usage: git diff-staged
+
+15: git config --global alias.push-all 'push --all'
+    //  Creates 'git push-all' to push all branches
+    //  Usage: git push-all
+
+//  SHORTHAND COMMANDS
+
+16: git config --global alias.s 'status'
+    //  Single letter: 'git s' for status
+
+17: git config --global alias.a 'add'
+    //  Single letter: 'git a' for add
+
+18: git config --global alias.c 'commit'
+    //  Single letter: 'git c' for commit
+
+19: git config --global alias.p 'push'
+    //  Single letter: 'git p' for push
+
+20: git config --global alias.l 'pull'
+    //  Single letter: 'git l' for pull
+
+//  VIEWING AND MANAGING ALIASES
+
+21: git config --list --global
+    //  Shows all global configuration including aliases
+
+22: git config --global --list | grep alias
+    //  Shows only alias commands
+
+23: git config --global --unset alias.alias_name
+    //  Removes a specific alias
+
+24: git config --global --edit
+    //  Open global config file in editor to edit aliases manually
+
+//  PRACTICAL ALIAS EXAMPLES FOR COMMON TASKS
+
+25: git config --global alias.save 'commit -am'
+    //  Quick save: git save "message"
+
+26: git config --global alias.unstash 'stash pop'
+    //  Quick unstash: git unstash
+
+27: git config --global alias.discard 'restore'
+    //  Discard changes: git discard file_name
+
+28: git config --global alias.sync 'pull --rebase'
+    //  Sync with rebase: git sync
+
+29: git config --global alias.new 'checkout -b'
+    //  Create new branch: git new branch-name
+
+30: git config --global alias.cleanup 'branch --merged'
+    //  Show branches to clean: git cleanup
+
+//  EXAMPLE: BUILDING YOUR PERSONAL ALIAS SET
+
+//  git config --global alias.st status
+//  git config --global alias.co checkout
+//  git config --global alias.br branch
+//  git config --global alias.cm 'commit -m'
+//  git config --global alias.ad add
+//  git config --global alias.ps push
+//  git config --global alias.pl pull
+//  git config --global alias.lol 'log --oneline --graph --all'
+//  git config --global alias.last 'log -1 HEAD'
+//  git config --global alias.unstage 'restore --staged'
+//  git config --global alias.amend 'commit --amend --no-edit'
+
+//  CREATING ALIASES WITH PARAMETERS (Advanced)
+
+//  You can create aliases that work with parameters:
+//  git config --global alias.find '!git log -S'
+//  Then: git find "search_text"
+
+//  git config --global alias.count 'rev-list --count HEAD'
+//  Then: git count (shows total commits)
+
+//  TIPS FOR CREATING GOOD ALIASES:
+//  - Keep them short and memorable
+//  - Use descriptive names if not sure about shorthand
+//  - Test aliases before relying on them
+//  - Document team aliases in project README
+//  - Avoid conflicting with existing Git commands
+//  - Share useful aliases with your team
+
+//  NOTES:
+//  - Aliases must be created with --global to be persistent
+//  - Local aliases only apply to specific repository
+//  - Aliases help increase productivity for frequent commands
+//  - Always verify alias syntax before committing
+//  - Use --unset to remove incorrect aliases

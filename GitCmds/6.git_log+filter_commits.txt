@@ -1,27 +1,168 @@
-//  git log commands
+//  Git Log Commands and Filtering Commits
 
-1.  git log -p                                                       //show commit with difference also (what has changed)
+//  BASIC GIT LOG
 
-2.  git log -3                                                       //show only 3 commit 
+1:  git log
+    //  Shows complete commit history with hash, author, date, and message
+    //  Most detailed view
 
-3.  git log -p -3                                                    //show 3 commit with diff
+2:  git log --oneline
+    //  Shows commits in one line each (short hash and message)
+    //  Most compact and readable format
 
-4.  git log --status                                                 //show small summary of commits
+3:  git log --short
+    //  Shows commit info in short format
 
-5.  git log --pretty=oneline                                         //show all commits in one line
+4:  git log --format=full
+    //  Shows more information about commits
 
-6.  git log --pretty=short                                           //show commit in short
+5:  git log --format=fuller
+    //  Shows even more detailed information
 
-7.  git log --pretty=full                                            //show more information of commits
+//  LIMITING NUMBER OF COMMITS
 
-//  merge commit
-8.  git commit --amend                                               //to change commit message    //an vim editor will open
+6:  git log -3
+    //  Shows only the last 3 commits
 
-//  filter commits
-9.  git log --since=3.days                                           //show commit of last 3 days
-    git log --since=3.weeks                                          //weeks  
-    git log --since=2.years                                          //years                
+7:  git log -5 --oneline
+    //  Shows last 5 commits in one line each
 
-10. git log --pretty=format:"%h -- %an"                              //abbreviate hash commit    //author name     [ H is hash commit and h is abbreviate hash commit (means in short) ]
+8:  git log -p
+    //  Shows each commit with full diff (what changed line-by-line)
 
-11. git log --pretty=format:"%h -- %ae"                              //abbreviate hash commit    //author name     [ H is hash commit and h is abbreviate hash commit (means in short) ]
+9:  git log -p -3
+    //  Shows last 3 commits with full diff for each
+
+10: git log --stat
+    //  Shows summary of changes per commit (files and number of changes)
+
+//  FILTERING BY TIME
+
+11: git log --since=3.days
+    //  Shows commits from last 3 days
+
+12: git log --since=1.week
+    //  Shows commits from last week
+
+13: git log --since=2.weeks
+    //  Shows commits from last 2 weeks
+
+14: git log --since=1.month
+    //  Shows commits from last month
+
+15: git log --since=2.years
+    //  Shows commits from last 2 years
+
+16: git log --since="2024-01-15"
+    //  Shows commits since specific date (YYYY-MM-DD format)
+
+17: git log --until="2024-12-31"
+    //  Shows commits until specific date
+
+18: git log --since="1 month ago" --until="2 days ago"
+    //  Shows commits in a specific time range
+
+//  FILTERING BY AUTHOR
+
+19: git log --author="Ram"
+    //  Shows commits by author with name containing "Ram"
+
+20: git log --author="ram@example.com"
+    //  Shows commits by specific email
+
+21: git log --author="Ram" --oneline
+    //  Shows commits by Ram in short format
+
+22: git log --committer="Ram"
+    //  Shows commits committed (not authored) by Ram
+
+//  FILTERING BY MESSAGE/CONTENT
+
+23: git log --grep="bug"
+    //  Shows commits with message containing "bug"
+
+24: git log --grep="feature" --oneline
+    //  Shows commits about features in short format
+
+25: git log -S "search_text"
+    //  Shows commits where code added or removed containing "search_text"
+
+26: git log -p -S "function_name"
+    //  Shows commits that added/removed "function_name" with full diff
+
+//  FILTERING BY FILES
+
+27: git log -- file_name
+    //  Shows commits that modified specific file
+
+28: git log -- path/to/files/
+    //  Shows commits that modified files in specific directory
+
+29: git log --follow -- file_name
+    //  Shows commits for file including before renaming
+
+//  FORMATTING OUTPUT
+
+30: git log --pretty=oneline
+    //  Shows all commits in one line each (short format)
+
+31: git log --pretty=short
+    //  Shows commit in short format (hash, author, message)
+
+32: git log --pretty=full
+    //  Shows more information (author and committer)
+
+33: git log --pretty=format:"%h -- %an -- %ar"
+    //  Custom format: short hash, author name, relative time
+    //  %h = short hash, %an = author name, %ar = relative date
+
+34: git log --pretty=format:"%h -- %an -- %ae -- %s"
+    //  Custom format: hash, author, email, subject/message
+
+35: git log --pretty=format:"%h -- %ci -- %s"
+    //  Custom format: hash, commit date (ISO), subject
+
+36: git log --graph --oneline --all
+    //  Visual graph of branches and commits (best for seeing branch history)
+
+//  COMBINING FILTERS
+
+37: git log --author="Ram" --since="1.month" --oneline
+    //  Shows commits by Ram from last month in short format
+
+38: git log --grep="fix" --since="2.weeks" -- src/
+    //  Shows commits with "fix" in message from last 2 weeks in src/
+
+39: git log -p --author="Ram" -3
+    //  Shows last 3 commits by Ram with full diff
+
+//  AMENDING COMMITS
+
+40: git commit --amend
+    //  Modifies the last commit (message and/or files)
+    //  Opens editor to change message
+
+41: git commit --amend --no-edit
+    //  Adds more files to last commit without changing message
+
+//  PRACTICAL EXAMPLES
+
+//  View my commits from today:
+//  git log --author="<your-name>" --since="1.day"
+
+//  See what changed in a file:
+//  git log -p -- file_name
+
+//  Find when a bug was introduced:
+//  git log -S "buggy_code" -p
+
+//  See branch history visually:
+//  git log --graph --oneline --all
+
+//  NOTES:
+//  - Use --oneline for quick overview
+//  - Use -p to see actual code changes
+//  - Use --author and --since to find specific commits
+//  - Use -S to search for code changes
+//  - Format options allow custom output
+//  - --graph shows branch structure visually

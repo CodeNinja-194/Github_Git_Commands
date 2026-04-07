@@ -1,12 +1,107 @@
-// git reset,unstage & checkout
+//  Git Reset, Checkout, and Restore - Undoing Changes
 
+//  RESTORE: Modern way (recommended for new Git versions)
 
-1:git reset p.txt   //unstage file from staging directory
+1:  git restore file_name
+    //  Discards changes to file and restores to last commit
+    //  Updates working directory, doesn't change staging area
 
+2:  git restore --staged file_name
+    //  Removes file from staging area (unstages it)
+    //  File changes remain in working directory
 
-2:git checkout p.txt //to previous commit 
+3:  git restore --source=HEAD~2 file_name
+    //  Restores file to a specific commit (2 commits back)
 
+//  RESET: Moves HEAD pointer, modifies staging area and/or working directory
 
-3:git checkout . // to previous commit all the files.
+4:  git reset file_name
+    //  Unstages file (removes from staging area)
+    //  Same as 'git restore --staged file_name'
 
-4:git reset head~1 //rollback to last commit.
+5:  git reset --soft HEAD~1
+    //  Undoes last commit but keeps changes staged
+    //  Useful for correcting commit message before recommitting
+
+6:  git reset --mixed HEAD~1
+    //  Undoes last commit and unstages changes (default behavior)
+    //  Changes remain in working directory, ready to re-stage
+
+7:  git reset --hard HEAD~1
+    //  Undoes last commit and DISCARDS all changes permanently
+    //  WARNING: Destructive - lost changes cannot be recovered easily!
+
+8:  git reset HEAD~2
+    //  Rollback to 2 commits ago (default = --mixed)
+
+9:  git reset HEAD~3 --hard
+    //  Rollback to 3 commits ago and discard all changes
+
+10: git reset --hard origin/main
+    //  Resets to match remote main branch exactly (discards all local changes)
+
+//  CHECKOUT: Switches branches or restores files (older method)
+
+11: git checkout -- file_name
+    //  Discards changes to file and restores from staging area/last commit
+    //  Works only if file hasn't been staged
+
+12: git checkout HEAD -- file_name
+    //  Restores file from last commit (ignores staging area)
+
+13: git checkout branch_name
+    //  Switches to different branch
+
+14: git checkout -b new_branch
+    //  Creates new branch and switches to it
+
+15: git checkout .
+    //  Discards all changes in current directory and subdirectories
+    //  Restores all files to last commit
+
+//  DIFFERENCE BETWEEN RESET AND RESTORE
+
+//  git reset file_name = unstages (removes from staging area)
+//  git restore file_name = discards changes (reverts to last commit)
+//  git restore --staged file_name = unstages (same as git reset)
+
+//  DIFFERENCE BETWEEN SOFT, MIXED, HARD
+
+//  --soft   = move HEAD only, keep staging area and working directory
+//  --mixed  = move HEAD, reset staging area (default)
+//  --hard   = move HEAD, reset staging area, reset working directory (DESTRUCTIVE!)
+
+//  RECOVERY FROM RESET
+
+16: git reflog
+    //  Shows history of HEAD movements
+    //  Use this to find commits from before a hard reset
+
+17: git reset --hard commit_hash
+    //  Restore to a commit found in reflog
+
+//  PRACTICAL EXAMPLES
+
+//  Fix last commit (wrong message):
+//  1. git commit --amend -m "new message"
+
+//  Undo changes to one file:
+//  1. git restore file_name  (modern)
+//  2. or git checkout -- file_name  (older)
+
+//  Undo staging (file is staged but want to unstage):
+//  1. git restore --staged file_name  (modern)
+//  2. or git reset file_name  (older)
+
+//  Undo last commit, keep changes to re-do:
+//  1. git reset --soft HEAD~1
+//  2. git status  (see your changes)
+//  3. git add .  (re-stage as needed)
+//  4. git commit -m "new message"
+
+//  NOTES:
+//  - Use 'git restore' for newer Git versions
+//  - 'git reset --hard' is destructive, use carefully
+//  - Always check 'git status' before resetting
+//  - Use 'git reflog' to recover from mistakes
+//  - 'git restore' is safer and more intuitive than 'git checkout' for files

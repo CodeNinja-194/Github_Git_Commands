@@ -1,0 +1,92 @@
+//  Common Git Mistakes and How to Fix Them
+
+//  MISTAKE 1: COMMITTED TO WRONG BRANCH
+
+1:  Check current branch:
+    git branch
+
+2:  Create correct branch and move commits:
+    git checkout -b correct_branch
+    git checkout wrong_branch
+    git reset --soft HEAD~1                             //move back 1 commit
+    git checkout correct_branch
+    git commit -m "message"
+
+//  MISTAKE 2: COMMITTED SENSITIVE DATA (password, api key)
+
+3:  Remove from last commit:
+    git rm --cached sensitive_file
+    git commit --amend                                  //remove file from latest commit
+
+4:  Remove from entire history (DESTRUCTIVE):
+    git filter-branch --tree-filter 'rm -f sensitive_file' HEAD
+    git push -f origin branch_name                      //(force push after cleanup)
+
+//  MISTAKE 3: FORGOT TO ADD FILE TO STAGING BEFORE COMMIT
+
+5:  Fix last commit:
+    git add forgotten_file
+    git commit --amend --no-edit                        //add to previous commit, keep message
+
+//  MISTAKE 4: WRONG COMMIT MESSAGE
+
+6:  Fix last commit message:
+    git commit --amend -m "New message"
+
+7:  Fix older commit message:
+    git rebase -i HEAD~n                                //n = number of commits back
+    Change 'pick' to 'reword' for target commit
+    Save, edit message, save again
+
+//  MISTAKE 5: PUSHED WRONG BRANCH
+
+8:  Delete remote branch:
+    git push -d origin wrong_branch
+
+9:  Push correct branch:
+    git push origin correct_branch
+
+//  MISTAKE 6: ACCIDENTALLY DELETED COMMITS
+
+10: Check reflog:
+    git reflog
+
+11: Recover:
+    git reset --hard commit_hash                        //restore from reflog
+    or
+    git cherry-pick lost_commit_hash                    //reapply specific commit
+
+//  MISTAKE 7: COMMITTED TO MASTER BY ACCIDENT
+
+12: Move commit to new branch:
+    git checkout -b new_branch                          //create branch from current position
+    git checkout master
+    git reset --hard HEAD~1                             //remove from master
+    git checkout new_branch                             //commit is still on new_branch
+
+//  MISTAKE 8: PULL RESULTED IN UNWANTED MERGE COMMIT
+
+13: Undo last pull/merge:
+    git reset --hard HEAD~1
+
+14: Configure to use rebase by default:
+    git config --global pull.rebase true
+
+//  MISTAKE 9: LOST WORK AFTER FORCE PUSH
+
+15: Recover:
+    git reflog                                          //find the commit
+    git reset --hard commit_hash
+
+//  MISTAKE 10: BAD REBASE, LOST COMMITS
+
+16: Reflog saves you:
+    git reflog
+    git reset --hard commit_hash                        //go back to before rebase
+
+//  GENERAL SAFETY TIPS:
+//  - Never force push (-f) to shared branches (main, master, develop)
+//  - Always commit before major operations
+//  - Use git reflog to recover from most mistakes
+//  - Test locally before pushing
+//  - Code review before merging to main

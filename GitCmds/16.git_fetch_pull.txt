@@ -1,0 +1,36 @@
+//  Git Fetch vs Pull - Understanding Remote Operations
+
+//  Fetch: Download remote changes without merging
+//  Pull: Fetch + Merge (combines fetch and merge in one command)
+
+1:  git fetch                                           //download all changes from default remote (origin)
+
+2:  git fetch remote_name                               //fetch from specific remote
+
+3:  git fetch remote_name branch_name                   //fetch specific branch from remote
+
+4:  git fetch --all                                     //fetch from all remotes
+
+5:  git fetch --prune                                   //remove local tracking branches for deleted remote branches
+
+6:  git pull                                            //fetch and merge origin/current_branch into current branch
+
+7:  git pull --rebase                                   //fetch and rebase instead of merge (creates linear history)
+
+8:  git pull origin branch_name                         //fetch and merge specific branch from origin
+
+9:  git pull origin branch_name --no-ff                 //fetch and merge creating merge commit (preserves branch history)
+
+10: git branch -r                                       //list remote tracking branches (like origin/master)
+
+11: git branch -a                                       //list all local and remote tracking branches
+
+12: git diff origin/master master                       //compare local master with remote origin/master
+
+//  Workflow:
+//  1. git fetch origin                                 //download changes
+//  2. Review changes with git diff origin/master       //check what changed
+//  3. git pull origin                                  //or git merge origin/master to integrate
+
+//  config default pull behavior:
+//  git config --global pull.rebase true                //use rebase instead of merge by default

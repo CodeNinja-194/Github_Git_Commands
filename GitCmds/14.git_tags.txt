@@ -1,0 +1,31 @@
+//  Git Tags - Creating Release Markers and Version Labels
+
+//  Tags mark specific points in history, useful for marking releases and versions
+
+1:  git tag tag_name                                    //create lightweight tag at current commit
+
+2:  git tag -a tag_name -m "message"                    //create annotated tag with message (recommended)
+
+3:  git tag                                             //list all tags
+
+4:  git tag -l "pattern*"                               //list tags matching pattern (e.g., v1.*)
+
+5:  git show tag_name                                   //show information about specific tag
+
+6:  git tag tag_name commit_hash                        //create tag on specific commit
+
+7:  git push origin tag_name                            //push specific tag to remote
+
+8:  git push origin --tags                              //push all tags to remote
+
+9:  git tag -d tag_name                                 //delete local tag
+
+10: git push origin --delete tag_name                   //delete tag from remote
+
+11: git checkout tag_name                               //checkout to specific tag (detached HEAD state)
+
+12: git diff tag1 tag2                                  //compare two tags
+
+//  Tag naming convention (Semantic Versioning):
+//  v1.0.0  - major.minor.patch
+//  v2.1.3-beta  - with pre-release

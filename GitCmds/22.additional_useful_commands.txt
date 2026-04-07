@@ -1,0 +1,144 @@
+//  Additional Useful Git Commands
+
+//  SEARCHING IN REPOSITORY
+
+1:  git grep "search_term"                              //search for text in tracked files
+
+2:  git grep "search_term" -- *.js                      //search in specific file types
+
+3:  git log -S "search_term"                            //find commits that added/removed text
+
+4:  git log --all --grep="pattern"                      //search commit messages
+
+//  CLEANING UP
+
+5:  git clean -n                                        //dry-run: show what would be deleted
+
+6:  git clean -fd                                       //force delete untracked files and directories
+
+7:  git clean -fdx                                      //also delete files ignored by .gitignore
+
+8:  git gc                                              //garbage collection, optimize repository
+
+9:  git prune                                           //remove unreachable objects
+
+//  FILE TRACKING
+
+10: git ls-files                                        //list all tracked files
+
+11: git ls-files -d                                     //list deleted files
+
+12: git check-ignore -v file_name                       //check if file is ignored and why
+
+13: git update-index --skip-worktree file_name          //ignore changes to tracked file locally
+
+14: git update-index --no-skip-worktree file_name       //stop ignoring file changes
+
+//  STATISTICS & INFO
+
+15: git shortlog                                        //summary of commits by author
+
+16: git shortlog -s -n                                  //count commits per author
+
+17: git log --oneline --graph --all                     //visual representation of all branches
+
+18: git log --stat                                      //show file changes per commit
+
+19: git log --follow file_name                          //show history following file renames
+
+20: git diff --stat                                     //show summary of changes
+
+21: git rev-list --count HEAD                           //count total commits
+
+22: git fsck --lost-found                               //find and recover lost commits
+
+//  CONFIGURATION TIPS
+
+23: git config --list --local                           //show repository-specific config
+
+24: git config --list --global                          //show global config
+
+25: git config user.name "Name"                         //set repo-specific username
+
+26: git config --local user.name "Name"                 //same as above (local scope)
+
+27: git config --unset user.name                        //remove a config value
+
+28: git config --edit --global                          //edit global config in editor
+
+//  WORKING WITH HISTORY
+
+29: git bisect start                                    //start binary search for bug
+
+30: git bisect bad                                      //mark current commit as bad
+
+31: git bisect good commit_hash                         //mark old commit as good
+
+32: git bisect run test_script.sh                       //automated bisect using test script
+
+33: git revparse HEAD                                   //get current commit hash (full)
+
+34: git rev-parse --short HEAD                          //get current commit hash (short)
+
+35: git show commit_hash                                //show specific commit and its changes
+
+36: git show commit_hash:file_name                      //show specific file from specific commit
+
+//  SYNCING IMPROVEMENTS
+
+37: git pull --all                                      //pull from all remotes
+
+38: git fetch --all --tags                              //fetch all tags from all remotes
+
+39: git config pull.rebase true                         //default to rebase instead of merge
+
+40: git config push.default current                     //push to branch with same name
+
+41: git push --all                                      //push all branches to remote
+
+42: git push --tags                                     //push all tags to remote
+
+//  PERFORMANCE & OPTIMIZATION
+
+43: git config core.preloadindex true                   //speed up git status
+
+44: git config core.fsmonitor true                      //use filesystem monitor
+
+45: git maintenance start                               //enable automatic maintenance
+
+46: git gc --aggressive                                 //thorough garbage collection (slower but better cleanup)
+
+//  DEBUGGING & INSPECTION
+
+47: git describe --tags                                 //show nearest tag from current commit
+
+48: git name-rev --name-only HEAD                       //show symbolic reference name
+
+49: git range-diff branch1 branch2                      //compare ranges of commits
+
+50: git log --oneline --decorate                        //show branch/tag info on log
+
+//  USEFUL ALIASES TO ADD
+
+51: git config --global alias.st status                 //shortcut: git st
+52: git config --global alias.co checkout               //shortcut: git co
+53: git config --global alias.br branch                 //shortcut: git br
+54: git config --global alias.unstage 'reset HEAD --'   //shortcut: git unstage file
+55: git config --global alias.last 'log -1 HEAD'        //shortcut: git last
+56: git config --global alias.visual 'log --graph --oneline --all'  //shortcut: git visual
+57: git config --global alias.amend 'commit --amend --no-edit'      //shortcut: git amend
+
+//  DOCUMENTATION
+
+58: git help command_name                               //show help for specific command
+
+59: git help -a                                         //list all git commands
+
+60: man git-command_name                                //show man page for git command
+
+//  TIPS:
+//  - Use git aliases for frequently used commands (see file 9.alias_names.txt)
+//  - Use git shortlog to see team contribution statistics
+//  - Use git bisect to find bugs efficiently
+//  - Use git clean to keep working directory clean
+//  - Use git grep to search without checking out files

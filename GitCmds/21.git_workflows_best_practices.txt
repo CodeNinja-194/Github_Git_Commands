@@ -1,0 +1,147 @@
+//  Git Workflows and Best Practices
+
+//  COMMON WORKFLOW PATTERNS
+
+//  WORKFLOW 1: GIT FLOW (Traditional)
+//  
+//  - master branch: production-ready code
+//  - develop branch: integration branch
+//  - feature branches: feature/feature-name
+//  - release branches: release/version-number
+//  - hotfix branches: hotfix/issue-name
+
+1:  Create feature branch:
+    git checkout -b feature/user-authentication
+
+2:  Work on feature:
+    git add .
+    git commit -m "Add login validation"
+
+3:  Push feature:
+    git push origin feature/user-authentication
+
+4:  Create Pull Request on GitHub
+
+5:  After review/approval, merge to develop:
+    git checkout develop
+    git pull origin develop
+    git merge --no-ff feature/user-authentication
+    git push origin develop
+
+6:  When ready for release:
+    git checkout -b release/v1.0.0
+    // bug fixes only
+    git checkout master
+    git merge --no-ff release/v1.0.0
+    git tag -a v1.0.0 -m "Release version 1.0.0"
+
+//  WORKFLOW 2: GITHUB FLOW (Simpler, for continuous deployment)
+//
+//  - main branch: always deployable
+//  - feature branches: any naming
+//  - merge via Pull Request
+//  - delete branch after merge
+
+7:  Create feature branch from main:
+    git checkout -b feature-name
+
+8:  Work and commit:
+    git add .
+    git commit -m "descriptive message"
+    git push origin feature-name
+
+9:  Create Pull Request
+10: Code review and merge
+11: Delete branch:
+    git branch -d feature-name
+    git push origin --delete feature-name
+
+//  WORKFLOW 3: TRUNK-BASED DEVELOPMENT
+//
+//  - main branch: single source of truth
+//  - short-lived feature branches (max 1-2 days)
+//  - frequent commits to main
+//  - continuous integration/deployment
+
+//  COMMIT MESSAGE BEST PRACTICES
+
+12: Use present tense:
+    Good:   "Add user authentication"
+    Bad:    "Added user authentication"
+
+13: Be specific and concise:
+    Good:   "Fix login button alignment on mobile"
+    Bad:    "Fix bug"
+
+14: Format:
+    First line: 50 characters max, summary
+    Blank line
+    Detailed explanation (if needed)
+
+15: Reference issues:
+    "Fix user login issue #123"
+    "Close #456 - improve performance"
+
+//  BRANCHING BEST PRACTICES
+
+16: Use descriptive names:
+    Good:   feature/user-profile-page
+    Good:   bugfix/navbar-styling
+    Good:   hotfix/payment-calculation
+    Bad:    feature1, temp, test
+
+17: Keep branches focused:
+    One feature/fix per branch
+    Easier to review and test
+    Simpler to revert if needed
+
+18: Delete merged branches:
+    git branch -d branch_name                           //locally
+    git push origin --delete branch_name                //remotely
+
+//  REVIEW AND MERGE BEST PRACTICES
+
+19: Before creating PR, ensure:
+    - Code is tested locally
+    - All tests pass
+    - No merge conflicts
+    - Branch is up to date with main
+
+20: Update branch before merge:
+    git fetch origin
+    git rebase origin/main
+    // or
+    git merge origin/main
+
+21: Use meaningful PR descriptions:
+    - What does this change?
+    - Why is it needed?
+    - How to test it?
+    - Related issues
+
+22: Merge strategies:
+    --ff: Fast-forward (simple merge)
+    --no-ff: Always create merge commit (preserves history)
+    --squash: Combine commits then merge
+
+//  PUSHING BEST PRACTICES
+
+23: Never force push to main/master:
+    git push origin branch_name
+
+24: Force push only on personal branches:
+    git push -f origin personal-branch         // only if not shared
+
+25: Push frequently:
+    Reduces merge conflicts
+    Backup your work
+    Enables collaboration
+
+//  SUMMARY OF RECOMMENDED WORKFLOW:
+//  1. Create feature branch: git checkout -b feature/name
+//  2. Make changes and test locally
+//  3. Commit with clear messages: git commit -m "message"
+//  4. Keep updated: git fetch origin, git rebase origin/main
+//  5. Push and create PR: git push origin feature/name
+//  6. Code review and merge
+//  7. Delete branch after merge

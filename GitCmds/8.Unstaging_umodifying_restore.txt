@@ -1,11 +1,124 @@
-//  Unstaging and unmodifying file
+//  Unstaging and Unmodifying Files - Managing Staging Area and Working Directory
 
-1:  git restore file_name                               //restore a file / unmodify the file and match with previous commit 
+//  UNSTAGING FILES (Removing from staging area but keeping changes)
 
-2.  git checkout -- filename                            //match it with previous commmit
+1:  git restore --staged file_name
+    //  Removes file from staging area (modern way - Git 2.23+)
+    //  Changes remain in working directory
 
-2:  git restore --staged file_name                      //unstage a file from staging area
+2:  git reset HEAD file_name
+    //  Removes file from staging area (traditional way)
+    //  Changes remain in working directory (same result as #1)
 
-4.  git checkout -f                                     //come to previous commit
+3:  git reset HEAD
+    //  Unstages all files (removes everything from staging area)
 
-5. git reset HEAD~					// remove last commit from local
+4:  git reset HEAD~1
+    //  Removes last commit but keeps changes in staging area
+    //  Good for fixing last commit
+
+//  MODIFYING/RESTORING FILES (Discarding changes)
+
+5:  git restore file_name
+    //  Discards all unsaved changes to file (restore to last commit)
+    //  Modifies working directory, doesn't touch staging area
+
+6:  git checkout -- file_name
+    //  Discards changes to file (older method, same as git restore)
+    //  Restores file from staging area or last commit
+
+7:  git restore .
+    //  Discards changes to all files in current directory
+    //  WARNING: Permanent loss of unsaved changes!
+
+8:  git checkout .
+    //  Discards changes to all files (older method)
+    //  WARNING: Permanent loss of unsaved changes!
+
+9:  git restore --source=HEAD~1 file_name
+    //  Restores file to a specific previous commit (1 commit ago)
+
+10: git checkout HEAD~2 -- file_name
+    //  Restores file to 2 commits ago (older method)
+
+//  REMOVING COMMITS
+
+11: git reset HEAD~1
+    //  Removes last commit (default = --mixed)
+    //  Changes stay in working directory
+
+12: git reset --soft HEAD~1
+    //  Removes last commit and keeps changes staged (ready to re-commit)
+    //  Good for fixing commit message
+
+13: git reset --hard HEAD~1
+    //  Removes last commit and DISCARDS all changes permanently
+    //  WARNING: Cannot easily recover!
+
+14: git reset HEAD~3 --hard
+    //  Removes last 3 commits and discards all changes
+
+//  COMPARING BEFORE UNDOING
+
+15: git diff
+    //  Shows unstaged changes (what will be lost)
+
+16: git diff --staged
+    //  Shows staged changes (what will be removed from staging)
+
+17: git status
+    //  Shows what files will be affected
+
+//  RECOVERY IF YOU MADE A MISTAKE
+
+18: git reflog
+    //  Shows history of HEAD movements
+    //  Use this to find commits after a reset
+
+19: git reset --hard commit_hash
+    //  Restore to a specific commit found in reflog
+
+20: git checkout commit_hash
+    //  View files at specific commit without creating branch
+
+//  PRACTICAL WORKFLOW EXAMPLES
+
+//  Scenario 1: Staged wrong file, need to unstage
+//  1. git status  (verify what's staged)
+//  2. git restore --staged wrong_file
+//  3. git status  (verify unstaged)
+
+//  Scenario 2: Modified file, want to discard changes
+//  1. git diff file_name  (see what changed)
+//  2. git restore file_name  (discard changes)
+//  3. git status  (verify clean)
+
+//  Scenario 3: Fix last commit message
+//  1. git commit --amend -m "new message"
+//  2. or if already pushed: git push -f origin branch_name
+
+//  Scenario 4: Undo last commit, keep changes to re-do
+//  1. git reset --soft HEAD~1
+//  2. git status  (changes are still staged)
+//  3. git add .  or git add specific_files
+//  4. git commit -m "new message"
+
+//  Scenario 5: Realize last commit was wrong, discard it completely
+//  1. git reset --hard HEAD~1  (WARNING: loses all changes!)
+//  2. git reflog  (if needed to recover)
+
+//  DIFFERENCE BETWEEN COMMANDS
+
+//  git restore file_name      = discard changes in working directory
+//  git restore --staged file  = unstage file from staging area
+//  git reset file_name        = unstage file (older method)
+//  git checkout -- file_name  = discard changes (older method)
+
+//  IMPORTANT NOTES:
+//  - Use 'git restore' for newer Git versions (2.23+)
+//  - Use 'git status' before any destructive operation
+//  - Use 'git diff' to review changes before discarding
+//  - Unstaging does NOT discard changes, just removes from staging
+//  - Restoring DOES discard changes permanently
+//  - Use 'git reflog' to recover from reset mistakes
+//  - Always be careful with --hard operations!

@@ -1,0 +1,30 @@
+//  Git Stashing - Temporarily Saving Changes
+
+//  Stashing is useful when you want to temporarily save changes without committing them
+//  Helps switch branches without losing work
+
+1:  git stash                                           //save current changes temporarily (stash working directory)
+
+2:  git stash save "message"                            //save stash with a descriptive message
+
+3:  git stash list                                      //show all stashed changes
+
+4:  git stash pop                                       //apply most recent stash and remove it from stash list
+
+5:  git stash apply                                     //apply most recent stash but keep it in stash list
+
+6:  git stash apply stash@{n}                           //apply specific stash (where n is index from git stash list)
+
+7:  git stash show                                      //show summary of most recent stash
+
+8:  git stash show -p                                   //show detailed differences of most recent stash
+
+9:  git stash show -p stash@{n}                         //show detailed differences of specific stash
+
+10: git stash drop                                      //delete most recent stash
+
+11: git stash drop stash@{n}                            //delete specific stash
+
+12: git stash clear                                     //delete all stashes
+
+13: git stash branch branch_name                        //create and switch to new branch and apply stash

@@ -1,0 +1,31 @@
+//  Git Rebase - Reapplying commits on top of another branch
+
+//  Rebasing is an alternative to merging that rewrites history
+//  Use with caution - don't rebase commits that are already pushed publicly
+
+1:  git rebase branch_name                              //rebase current branch on top of branch_name
+
+2:  git rebase --continue                               //continue rebase after resolving conflicts
+
+3:  git rebase --abort                                  //cancel the rebase operation
+
+4:  git rebase --skip                                   //skip current commit during rebase if conflict
+
+5:  git rebase -i HEAD~3                                //interactive rebase last 3 commits
+                                                        //allows squashing, rewording, reordering commits
+
+6:  git rebase -i branch_name                           //interactive rebase commits from branch_name to HEAD
+
+7:  git rebase -i --root                                //interactive rebase all commits from beginning
+
+//  Interactive Rebase options (when in editor):
+//  pick     - use commit as is
+//  reword   - use commit but edit commit message
+//  squash   - use commit and combine with previous commit
+//  fixup    - like squash but discard commit message
+//  drop     - remove commit entirely
+//  exec     - run shell command
+
+8:  git push -f origin branch_name                      //force push after rebase (only if not shared)
+
+9:  git reflog                                          //recover from bad rebase using reflog

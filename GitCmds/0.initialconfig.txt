@@ -1,16 +1,75 @@
-//Setting username,user email,core   editor
+//  Git Initial Configuration - Setting up Username, Email, and Core Editor
 
+//  GLOBAL CONFIGURATION (applies to all repositories on your machine)
 
-1.git config --global user.name "Ram"   // setting the username.
+1:  git config --global user.name "Ram"
+    //  Sets the global username that will appear in all commits
 
+2:  git config --global user.email "sriramadusumilli98@gmail.com"
+    //  Sets the global email that will appear in all commits
 
-2.git config --global user.email "sriramadusumilli98@gmail.com"  //setting the user email
+3:  git config --list
+    //  Shows all current Git configuration settings (both global and local)
 
+4:  git config --global core.editor vim
+    //  Sets the default text editor to vim (used for commit messages, etc.)
 
-3.git config --list  //show the details about above info.
+5:  git config --global core.editor emacs
+    //  Sets the default text editor to emacs (alternative to vim)
 
+6:  git config --global core.editor nano
+    //  Sets the default text editor to nano (easier for beginners)
 
-4.git config --global core.editor emacs    //setting the core editor to emacs.
+//  LOCAL CONFIGURATION (applies only to this specific repository)
 
+7:  git config user.name "Ram"
+    //  Sets username for this repository only (overrides global)
 
-5.git config --global core.editor vim //set core editor to vim.   //setting the core editor to vim.
+8:  git config user.email "personal@example.com"
+    //  Sets email for this repository only (overrides global)
+
+9:  git config --list --global
+    //  Shows only global configuration settings
+
+10: git config --list --local
+    //  Shows only local configuration settings for current repository
+
+11: git config --unset user.name
+    //  Removes a configuration setting
+
+12: git config --edit --global
+    //  Opens global configuration file in default editor for manual editing
+
+13: git config --edit --local
+    //  Opens local configuration file in default editor for manual editing
+
+//  VERIFYING YOUR CONFIGURATION
+
+14: git config user.name
+    //  Shows the currently set username
+
+15: git config user.email
+    //  Shows the currently set email
+
+16: git config core.editor
+    //  Shows the currently set default editor
+
+//  ADDITIONAL USEFUL CONFIGURATIONS
+
+17: git config --global push.default simple
+    //  Sets push behavior to simple (only pushes current branch)
+
+18: git config --global pull.rebase true
+    //  Uses rebase instead of merge when pulling (creates linear history)
+
+19: git config --global init.defaultBranch main
+    //  Sets default branch name to 'main' for new repositories
+
+20: git config --global core.ignorecase false
+    //  Makes Git case-sensitive (important for file names)
+
+//  NOTES:
+//  - Use --global flag for settings that apply to all your repositories
+//  - Omit --global flag for settings specific to current repository
+//  - Local configuration overrides global configuration
+//  - Always set user.name and user.email before making commits

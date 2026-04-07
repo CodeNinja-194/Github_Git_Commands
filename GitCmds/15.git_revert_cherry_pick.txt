@@ -1,0 +1,38 @@
+//  Git Revert and Cherry-pick - Managing Commits
+
+//  Revert: Safe way to undo commits (creates new commit)
+//  Cherry-pick: Copy specific commits to current branch
+
+//  REVERTING COMMITS
+
+1:  git revert commit_hash                              //create new commit that undoes changes from commit_hash
+
+2:  git revert HEAD                                     //revert most recent commit
+
+3:  git revert HEAD~2                                   //revert 2 commits ago (creates one revert commit)
+
+4:  git revert -n commit_hash                           //revert without auto-committing (allows editing)
+
+5:  git revert --continue                               //continue revert after resolving conflicts
+
+6:  git revert --abort                                  //cancel the revert operation
+
+//  CHERRY-PICKING COMMITS
+
+7:  git cherry-pick commit_hash                         //apply specific commit to current branch
+
+8:  git cherry-pick commit_hash1 commit_hash2           //apply multiple commits
+
+9:  git cherry-pick branch_name                         //apply last commit from branch_name
+
+10: git cherry-pick branch_name~2..branch_name          //apply range of commits (last 2 commits from branch_name)
+
+11: git cherry-pick --continue                          //continue after resolving conflicts
+
+12: git cherry-pick --abort                             //cancel cherry-pick operation
+
+13: git cherry-pick -x commit_hash                      //cherry-pick and append original commit hash in message
+
+//  Difference between Revert and Reset:
+//  revert   - creates new commit, safe for shared branches
+//  reset    - changes history, use only on local branches

@@ -1,13 +1,66 @@
-// Cloning git repository.
+//  Cloning Git Repositories - Getting a Copy of Remote Code
 
-//copy url from an github repository.
+//  BASIC CLONING
 
+1:  git clone https://github.com/RamAdusumilli194/Github_Git_Commands.git
+    //  Clones entire remote repository to your local machine
+    //  Creates a new directory with the repository name
 
-1.git clone https://github.com/RamAdusumilli194/Github_Git_Commands.git
+2:  git clone <repo-url> local_folder_name
+    //  Clones repository but gives it a custom local folder name
+    //  Example: git clone https://github.com/user/repo.git my-project
 
+3:  git clone --depth 1 <repo-url>
+    //  Clones only the latest commit (faster, saves disk space)
+    //  Useful for large repositories
 
-//If we want to give our own name to a repository 
+4:  git clone --branch develop <repo-url>
+    //  Clones a specific branch instead of default (usually main/master)
+    //  Example: git clone --branch develop https://github.com/user/repo.git
 
-2.git clone https://github.com/RamAdusumilli194/Github_Git_Commands/Status_tracking.txt
+5:  git clone --single-branch <repo-url>
+    //  Clones only the current branch, not all branches
+
+//  CLONING SPECIFIC FILES OR FOLDERS
+
+6:  git clone --no-checkout <repo-url>
+    //  Clones repository but doesn't check out files (downloads metadata only)
+
+7:  git sparse-checkout init
+    //  Enables sparse checkout mode (only specific folders downloaded)
+
+8:  git sparse-checkout set src/ tests/
+    //  Downloads and checks out only 'src' and 'tests' folders
+
+//  SSH vs HTTPS
+
+9:  git clone https://github.com/user/repo.git
+    //  Clones using HTTPS (requires password or personal access token)
+
+10: git clone git@github.com:user/repo.git
+    //  Clones using SSH (requires SSH key setup, faster and more secure)
+
+//  AFTER CLONING
+
+11: cd repository_name
+    //  Navigate into the cloned repository
+
+12: git branch -a
+    //  Shows all branches (local and remote) after cloning
+
+13: git remote -v
+    //  Shows the remote repository URL (origin)
+
+//  CLONING FROM LOCAL DIRECTORY
+
+14: git clone /path/to/local/repo
+    //  Clones from a local repository instead of remote server
+
+//  TIPS:
+//  - HTTPS requires credentials; SSH is faster if SSH key is set up
+//  - Use --depth for large repositories to save time and space
+//  - Use --single-branch to avoid downloading all branches
+//  - After cloning, you can switch branches with 'git checkout branch-name'
+//  - The original repository becomes 'origin' remote by default
 
 
