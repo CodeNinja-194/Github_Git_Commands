@@ -1,0 +1,1 @@
+This is the sample file for the pull operation. It contains some text to demonstrate the pull operation.
