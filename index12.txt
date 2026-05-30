@@ -1,0 +1,5 @@
+    This is a sample text file. It contains multiple lines of text. Each line can be read and processed by a program. This file is used for testing purposes. It can be used to demonstrate file handling in programming languages. The content of this file is not important,
+    but it serves as an example for reading and writing files.
+
+
+                            Feel free to add more lines or change the existing lines to suit your needs.
